@@ -14,7 +14,7 @@ import Header from '../components/Header';
 import MenuBar from '../components/MenuBar'
 import ScoreBar from '../components/ScoreBar';
 import PoliticalScoreBar from '../components/PoliticalScoreBar';
-import {CircularProgress} from 'react-native-circular-progress';
+import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import {Font} from 'expo';
 
 export default class UserHome extends Component {
@@ -26,6 +26,7 @@ export default class UserHome extends Component {
       sScore: 0,
       gScore: 0,
       pScore: 0,
+      userLoaded: false,
       fontsLoaded: false
     }
   }
@@ -37,8 +38,8 @@ export default class UserHome extends Component {
       },
       body: JSON.stringify({userID: this.props.navigation.getParam('userID')})
     }).then(response => response.json()).then(json => {
-      console.log('json', json);
-      this.setState({eScore: json.eScore, sScore: json.sScore, gScore: json.gScore, pScore: json.pScore})
+      // console.log('json', json);
+      this.setState({eScore: json.eScore, sScore: json.sScore, gScore: json.gScore, pScore: json.pScore, userLoaded: true,})
     });
   }
   componentDidMount() {
@@ -57,7 +58,7 @@ export default class UserHome extends Component {
               fontFamily: "customFont"
             }
           ]}>Your Impact</Text>
-        <CircularProgress size={180} width={24} fill={0.4*this.state.eScore+0.4*this.state.sScore+0.2*this.state.gScore} lineCap="round" rotation={0} tintColor="#F1C40F" backgroundColor="#EEEEEE">
+        <AnimatedCircularProgress size={180} width={24} fill={0.4*this.state.eScore+0.4*this.state.sScore+0.2*this.state.gScore} lineCap="round" rotation={0} tintColor="#F1C40F" backgroundColor="#EEEEEE">
           {
             (fill) => (<Text style={[
                 styles.letterGrade, {
@@ -67,7 +68,7 @@ export default class UserHome extends Component {
               {"B"}
             </Text>)
           }
-        </CircularProgress>
+        </AnimatedCircularProgress>
         <View style={styles.barContainer}>
           <Text style={[
               styles.barText, {
@@ -92,10 +93,10 @@ export default class UserHome extends Component {
                 fontFamily: "customFont"
               }
             ]}>Political - Liberal</Text>
-          <PoliticalScoreBar value={this.state.pScore}/>
+          <PoliticalScoreBar value={this.state.pScore} loaded={this.state.userLoaded}/>
         </View>
       </View>
-      <MenuBar/>
+      <MenuBar goToTable={()=>{this.props.navigation.navigate('TransactionTable', {userID: this.props.navigation.getParam('userID')});}}/>
     </View>);
   }
   logout = () => {

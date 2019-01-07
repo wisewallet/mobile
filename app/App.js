@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, StatusBar} from 'react-native';
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 import Login from './views/Login.js';
 import UserHome from './views/UserHome.js';
+import TransactionTable from './views/TransactionTable.js';
 
 const Application = createStackNavigator({
   Home: {
@@ -10,6 +11,9 @@ const Application = createStackNavigator({
   },
   UserHome: {
     screen: UserHome
+  },
+  TransactionTable: {
+    screen: TransactionTable
   },
 }, {
     headerMode: 'none',

@@ -6,17 +6,26 @@ import {
   StyleSheet,
   Platform,
   Image,
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from 'react-native';
 
 class MenuBar extends Component {
   render() {
     return (<View style={styles.background}>
       <View style={styles.container}>
+      <TouchableOpacity onPress={()=>{this.props.goToTable();}}>
+        <Image style={styles.logo} source={require('../assets/logo.png')}/>
+      </TouchableOpacity>
+      <TouchableOpacity>
         <Image style={styles.logo} source={require('../assets/white.png')}/>
+      </TouchableOpacity>
+      <TouchableOpacity>
         <Image style={styles.logo} source={require('../assets/white.png')}/>
+      </TouchableOpacity>
+      <TouchableOpacity>
         <Image style={styles.logo} source={require('../assets/white.png')}/>
-        <Image style={styles.logo} source={require('../assets/white.png')}/>
+      </TouchableOpacity>
       </View>
     </View>);
   }

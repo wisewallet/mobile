@@ -89,7 +89,7 @@ export default class Login extends React.Component {
       },
       body: JSON.stringify({email: this.state.email, password: this.state.password})
     }).then(response => response.json()).then(json => {
-      console.log('json', json);
+      // console.log('json', json);
       if (json.success) {
         this.props.navigation.navigate('UserHome', {userID: json.userID});
       } else {

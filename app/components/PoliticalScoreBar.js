@@ -5,7 +5,8 @@ import {View, Text, StyleSheet, Platform} from 'react-native';
 class PoliticalScoreBar extends Component {
   render() {
     const value = this.props.value.toString() + "%";
-    return (<View style={styles.background}>
+    console.log(this.props);
+    return (<View style={this.props.loaded ? styles.background : styles.unloadedBackground}>
       <View style={[
           styles.filling, {
             width: value
@@ -16,6 +17,14 @@ class PoliticalScoreBar extends Component {
 }
 
 const styles = StyleSheet.create({
+  unloadedBackground:{
+    height: 24,
+    width: "100%",
+    backgroundColor: "#EEEEEE",
+    borderRadius: 12,
+    margin: 10,
+    marginLeft: 0
+  },
   background: {
     height: 24,
     width: "100%",

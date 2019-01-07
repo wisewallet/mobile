@@ -6,14 +6,17 @@ import {
   StyleSheet,
   Platform,
   Image,
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from 'react-native';
 
 class Header extends Component {
   render() {
     return (<View style={styles.background}>
       <View style={styles.container}>
-        <Image style={styles.logo} source={require('../assets/white.png')}/>
+      <TouchableOpacity onPress={()=>{this.props.returnHome();}}>
+        <Image style={styles.logo} source={require('../assets/profile.png')}/>
+      </TouchableOpacity>
         <TextInput placeholder='Search' style={styles.searchBar} onChangeText={(search) => this.setState({search})}/>
       </View>
     </View>);
