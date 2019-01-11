@@ -44,9 +44,18 @@ export default class TransactionTable extends Component {
     Font.loadAsync({customFont: require('../assets/fonts/Roboto-Medium.ttf')}).then(() => this.setState({fontsLoaded: true}));
   }
   render() {
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2
+    });
     const buildCol = (param) =>{
       return this.state.transactionList.map((t) => {
-        return <View style={{borderWidth: 1, borderColor:'#fff'}}><Text style={{paddingRight: 50}}>{t[param]}</Text></View>;
+        let tableVal = t[param];
+        if(param === "amount"){
+          tableVal = formatter.format(t[param]);
+        }
+        return <View style={{alignSelf: 'left', paddingBottom: 10}}><Text style={{paddingRight: 50, fontSize: 18,}}>{tableVal}</Text></View>;
       });
     };
     const tableData = {
@@ -67,32 +76,32 @@ export default class TransactionTable extends Component {
       <ScrollView horizontal={true}>
 
       <View style={{ flex: 1, flexDirection: "row", alignSelf: "stretch" }}>
-        <View style={{ flex: 2, alignSelf: 'stretch', borderWidth: 1, borderColor:'#fff'}}>
-          <Text style={{paddingRight: 50, fontSize: 20, fontWeight: 'bold'}}>Company</Text>
+        <View style={{...styles.tableColumn, backgroundColor:'#d3d3d3'}}>
+          <Text style={styles.tableHeaderText}>Company</Text>
           {tableData.companies}
         </View>
-        <View style={{ flex: 2, alignSelf: 'stretch', borderWidth: 1, borderColor:'#fff'}}>
-          <Text style={{paddingRight: 50}}>Date</Text>
+        <View style={styles.tableColumn}>
+          <Text style={styles.tableHeaderText}>Date</Text>
           {tableData.dates}
         </View>
-        <View style={{ flex: 1, alignSelf: 'stretch', borderWidth: 1, borderColor:'#fff' }}>
-          <Text style={{paddingRight: 50}}>Amount</Text>
+        <View style={{...styles.tableColumn, backgroundColor:'#d3d3d3'}}>
+          <Text style={styles.tableHeaderText}>Amount</Text>
           {tableData.amounts}
         </View>
-        <View style={{ flex: 1, alignSelf: 'stretch', borderWidth: 1, borderColor:'#fff' }}>
-          <Text style={{paddingRight: 50}}>People</Text>
+        <View style={styles.tableColumn}>
+          <Text style={styles.tableHeaderText}>People</Text>
           {tableData.people}
         </View>
-        <View style={{ flex: 1, alignSelf: 'stretch', borderWidth: 1, borderColor:'#fff' }}>
-          <Text style={{paddingRight: 50}}>Planet</Text>
+        <View style={{...styles.tableColumn, backgroundColor:'#d3d3d3'}}>
+          <Text style={styles.tableHeaderText}>Planet</Text>
           {tableData.planet}
         </View>
-        <View style={{ flex: 1, alignSelf: 'stretch', borderWidth: 1, borderColor:'#fff' }}>
-          <Text style={{paddingRight: 50}}>Policy</Text>
+        <View style={styles.tableColumn}>
+          <Text style={styles.tableHeaderText}>Policy</Text>
           {tableData.policy}
         </View>
-        <View style={{ flex: 1, alignSelf: 'stretch', borderWidth: 1, borderColor:'#fff' }}>
-          <Text>Politics</Text>
+        <View style={{...styles.tableColumn, backgroundColor:'#d3d3d3'}}>
+          <Text style={styles.tableHeaderText}>Politics</Text>
           {tableData.politics}
         </View>
       </View>
@@ -162,5 +171,21 @@ var styles = StyleSheet.create({
   },
   letterGrade: {
     fontSize: 50
-  }
+  },
+  tableColumn: {
+    flex: 1,
+    alignSelf: 'stretch',
+    // borderWidth: 1,
+    // borderColor:'#fff',
+    alignItems: 'center',
+    paddingLeft:10,
+    paddingRight:10,
+
+  },
+  tableHeaderText: {
+    fontFamily: "customFont",
+    fontSize: 25,
+    fontWeight: 'bold',
+    paddingBottom: 15,
+  },
 });
