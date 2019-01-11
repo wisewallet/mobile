@@ -41,7 +41,7 @@ export default class Login extends React.Component {
     }
     return (<View style={styles.background}>
       <CustomStatusBar/>
-      <Image style={styles.logo} source={require('../assets/white.png')}/>
+      <Image style={styles.logo} source={require('../assets/logo.png')}/>
       <Text style={styles.logoText}>WiseWallet</Text>
       <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={-100} style={{
           width: "100%",
@@ -49,8 +49,8 @@ export default class Login extends React.Component {
           justifyContent: 'center'
         }}>
         <View style={styles.container}>
-          <TextInput placeholder='Email' onChangeText={(email) => this.setState({email})} style={styles.textBox}/>
-          <TextInput placeholder='Password' onChangeText={(password) => this.setState({password})} style={styles.textBox}/>
+          <TextInput placeholder='Email' onChangeText={(email) => this.setState({email})} style={styles.textBox} autoCapitalize = 'none'/>
+          <TextInput placeholder='Password' onChangeText={(password) => this.setState({password})} style={styles.textBox} secureTextEntry={true}/>
           <TouchableOpacity onPress={this.login} style={styles.logInButton}>
             <View style={styles.containerButton}>
               <Text style={[

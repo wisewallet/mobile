@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, StatusBar} from 'react-native';
-import {createStackNavigator} from 'react-navigation';
+import {createStackNavigator, createAppContainer} from 'react-navigation';
 import Login from './views/Login.js';
 import UserHome from './views/UserHome.js';
 
@@ -10,7 +10,7 @@ const Application = createStackNavigator({
   },
   UserHome: {
     screen: UserHome
-  }
+  },
 }, {
     headerMode: 'none',
     navigationOptions: {
@@ -18,9 +18,10 @@ const Application = createStackNavigator({
     }
 }
 );
+const AppContainer = createAppContainer(Application);
 
 export default class App extends React.Component {
   render() {
-    return (<Application/>);
+    return (<AppContainer/>);
   }
 }
