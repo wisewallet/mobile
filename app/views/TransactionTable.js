@@ -62,10 +62,10 @@ export default class TransactionTable extends Component {
       companies: buildCol('name'),
       dates: buildCol('date'),
       amounts: buildCol('amount'),
-      people: buildCol('pScore'),
+      people: buildCol('sScore'),
       planet: buildCol('eScore'),
       policy: buildCol('gScore'),
-      politics: buildCol('sScore'),
+      politics: buildCol('pScore'),
     };
     while (!this.state.fontsLoaded) {
       return (<Text style={{paddingRight: 50, borderWidth: 1, borderColor:'#fff'}}>Loading..</Text>);
